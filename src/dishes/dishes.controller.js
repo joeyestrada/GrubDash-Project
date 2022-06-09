@@ -30,6 +30,11 @@ function bodyDataHas(propertyName) {
   };
 }
 
+const bodyDataHasName = bodyDataHas("name");
+const bodyDataHasDescription = bodyDataHas("description");
+const bodyDataHasImageUrl = bodyDataHas("image_url");
+const bodyDataHasPrice = bodyDataHas("price");
+
 function priceValidation(req, res, next) {
   const {
     data: { price },
@@ -99,20 +104,20 @@ module.exports = {
   list,
   read: [dishExists, read],
   create: [
-    bodyDataHas("name"),
-    bodyDataHas("description"),
-    bodyDataHas("image_url"),
-    bodyDataHas("price"),
+    bodyDataHasName,
+    bodyDataHasDescription,
+    bodyDataHasImageUrl,
+    bodyDataHasPrice,
     priceValidation,
     create,
   ],
   update: [
     dishExists,
     dishIdMatches,
-    bodyDataHas("name"),
-    bodyDataHas("description"),
-    bodyDataHas("image_url"),
-    bodyDataHas("price"),
+    bodyDataHasName,
+    bodyDataHasDescription,
+    bodyDataHasImageUrl,
+    bodyDataHasPrice,
     priceValidation,
     update,
   ],

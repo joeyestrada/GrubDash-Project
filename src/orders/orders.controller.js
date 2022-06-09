@@ -28,6 +28,11 @@ function bodyDataHas(propertyName) {
   };
 }
 
+const bodyDataHasDeliverTo = bodyDataHas("deliverTo");
+const bodyDataHasMobileNumber = bodyDataHas("mobileNumber");
+const bodyDataHasStatus = bodyDataHas("status");
+const bodyDataHasDishes = bodyDataHas("dishes");
+
 function dishesCheck(req, res, next) {
   const { data: { dishes } = {} } = req.body;
   if (!Array.isArray(dishes) || !dishes.length) {
@@ -138,19 +143,19 @@ module.exports = {
   list,
   read: [orderExists, read],
   create: [
-    bodyDataHas("deliverTo"),
-    bodyDataHas("mobileNumber"),
-    bodyDataHas("dishes"),
+    bodyDataHasDeliverTo,
+    bodyDataHasMobileNumber,
+    bodyDataHasDishes,
     dishesCheck,
     create,
   ],
   delete: [orderExists, checkPending, destroy],
   update: [
     orderExists,
-    bodyDataHas("deliverTo"),
-    bodyDataHas("mobileNumber"),
-    bodyDataHas("status"),
-    bodyDataHas("dishes"),
+    bodyDataHasDeliverTo,
+    bodyDataHasMobileNumber,
+    bodyDataHasStatus,
+    bodyDataHasDishes,
     dishesCheck,
     orderIdCheck,
     statusCheck,
